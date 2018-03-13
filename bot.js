@@ -34,8 +34,35 @@ client.on('message', message => {
 
  
 
+if(commandIs("donate")){
+message.channel.send("Donations are welcome, just visit this server order to donate us!, you will get VIP commands. https://discord.gg/ddUfRUn");
+}
+if(commandIs("serverinfo")){
+ try {
+      let guild = message.guild
 
+      const embed = new Discord.RichEmbed()
+        .setDescription("Description and information about this server")
+        .setColor(0x70b080)
+        .setThumbnail(guild.iconURL)
+        .setTimestamp(new Date())
+        .addField("Name", guild.name, true)
+        .addField("ID", guild.id, true)
+        .addField("Owner", guild.owner.user.tag, true)
+        .addField("Region", guild.region, true)
 
+        .addField("Verification Level", guild.verificationLevel, true)
+        .addField("Channels", guild.channels.array().length, true)
+        .addField("Members", guild.memberCount, true)
+        .addField("Creation Date", guild.createdAt, true)
+
+      message.channel.send(embed)
+      return;
+    } catch (err) {
+      console.log(err);
+      message.channel.send(ess.errorHandle(err));
+    }
+}
   //Ping Command
   if (commandIs("ping")) {
     message.channel.send(`Pong! The bot's ping is ${Date.now() - message.createdTimestamp} ms`);
