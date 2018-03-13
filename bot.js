@@ -28,9 +28,6 @@ client.on('guildMemberAdd', member => {
 client.on('message', message => {
 if (message.content.startsWith(":help"))
     message.channel.send("The bot is in development ")
-if (message.contect.startsWith(":ping"))
-	message.channel.send(`Pong! The bot's ping is ${Date.now() - message.createdTimestamp} ms`);
-
 });
 
 
