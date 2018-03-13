@@ -207,12 +207,14 @@ client.on('message', message => {
         message.channel.send("I cannot ban this user. Please check permissions.");
         return;
       }
-
-      let reason = message.content.split(" ").slice(2).join(" ")
+if(message.member.hasPermission("banMembers")){
+ let reason = message.content.split(" ").slice(2).join(" ")
       if (!reason) {
         message.channel.send("Please indicate a reason for the ban!");
         return;
       }
+}
+     
 
       member.send(`
 You have been banned! - PERMANENT
