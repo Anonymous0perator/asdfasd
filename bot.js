@@ -33,10 +33,7 @@ client.on('message', message => {
     }
   }
 
-    if(message.member.roles.find("name", "Verified")){
-      let member = message.guild.member(message.author);
-      member.setNickname(`[${member.highestRole.name}] ${member.user.username}`)
-        }
+ 
 
 
 
@@ -48,20 +45,50 @@ client.on('message', message => {
 
   // Whois Command
   if (commandIs("userinfo")) {
-    let member = message.guild.member(message.author);
-    const embed = new Discord.RichEmbed()
-      .setDescription("Description and information about yourself.")
-      .setAuthor(message.author.username, message.author.avatarURL)
-      .setColor(0x70b080)
-      .setFooter("xAtom", client.user.avatarURL)
-      .setImage(message.author.avatarURL)
-      .setThumbnail(client.user.avatarURL)
-      .setTimestamp(new Date())
-      .addField("Server Name", message.guild.name)
-      .addField("Nickname", member.nickname)
-      .addField("Moderator", member.hasPermission("BAN_MEMBERS"))
-    message.channel.send(embed)
-    return;
+   try {
+      if (message.mentions.members.first()) {
+        let member = message.mentions.members.first().user
+        let guildMember = message.mentions.members.first()
+        const embed = new Discord.RichEmbed()
+          .setDescription("Description and information about " + member.tag)
+          .setAuthor(member.username, member.displayAvatarURL)
+          .setColor(0x70b080)
+          .setThumbnail(member.displayAvatarURL)
+          .setTimestamp(new Date())
+          .setFooter("xAtom", client.user.avatarURL)
+          .addField("ID", member.id)
+          .addField("Discriminator", member.discriminator)
+          .addField("Status", member.presence.status)
+
+          .addField("Nickname", guildMember.nickname)
+          .addField("Moderator", guildMember.hasPermission("BAN_MEMBERS"))
+          .addField("Joined at", guildMember.joinedAt)
+          .addField("Role(s)", guildMember.roles.array().join(", "))
+        message.channel.send(embed)
+      } else {
+        let member = message.author
+        let guildMember = message.guild.member(member)
+        const embed = new Discord.RichEmbed()
+          .setDescription("Description and information about " + member.tag)
+          .setAuthor(member.username, member.displayAvatarURL)
+          .setColor(0x70b080)
+          .setThumbnail(member.displayAvatarURL)
+          .setTimestamp(new Date())
+          .setFooter("xAtom", client.user.avatarURL)
+          .addField("ID", member.id)
+          .addField("Discriminator", member.discriminator)
+          .addField("Status", member.presence.status)
+
+          .addField("Nickname", guildMember.nickname)
+          .addField("Moderator", guildMember.hasPermission("BAN_MEMBERS"))
+          .addField("Joined at", guildMember.joinedAt)
+          .addField("Role(s)", guildMember.roles.array().join(", "))
+        message.channel.send(embed)
+      }
+      return;
+    } catch (err) {
+      message.channel.send(ess.errorHandle(err));
+    }
   }
 
 
@@ -73,42 +100,19 @@ client.on('message', message => {
       .addField("help", "This help panel")
       .addField("ping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
-      .addField("verify", "Gives you a verified role (smart-automatic detection)")
-      .addField("creators", "Credits for the bot")
+      .addField("verify", "Gives you a verified role (roblox supported)")
       .addField("purge", "Delete a bulk load of messages (100 max)")
       .addField("ban", "Bans a member from the server")
       .addField("unban", "Unbans the member from the server")
       .addField("kick", "Kicks a member from the server")
-      .addField("buy", "Gives invite to the xAtom main server | Price")
       .addField("warn", "It will warn the people who you tagged")
-      .addField("translate", "It will any language to English")
+      .addField("support", "Invite link to support channel")
       .setFooter("xAtom", client.user.avatarURL)
       .setThumbnail(client.user.avatarURL)
 
     message.channel.send(embed);
   }
 
-  if (commandIs("creators")) {
-    const embed = new Discord.RichEmbed()
-      .setTitle("Creators of xAtom")
-      .setDescription("People who made bot xAtom successful and become better than anything before.")
-      .setColor(0x70b080)
-      .addField("Creator", "Anonymous0perator")
-      .addField("Developers", "Encoloniel\nAnonymous0perator")
-      .addField("GFX Artists", "Encoloniel")
-      .setFooter("xAtom", client.user.avatarURL)
-      .setThumbnail(client.user.avatarURL)
-
-    message.channel.send(embed);
-  }
-  if(commandIs("checked")){
-    message.channel.send("xAtom is purchased. Next payment date is next monday");
-  }
-  if(commandIs("unchecked"))  {
-      message.channel.send("xAtom is not purchased, xAtom will be leaving this server");
-
-      message.guild.leave()
-    }
     if(commandIs("mute")) {
       client.muteUser = function (user, channel, callback) {
           var object = {"readMessages": false, "sendMessages": false};
@@ -162,25 +166,7 @@ client.on('message', message => {
       message.channel.send(ess.errorHandle(err));
     }
   }
-if(commandIs("translate")){
-  if (!message.content.split(" ")[1]) {
-    message.channel.send("You need to provide a sentence first!")
-    return;
-  }
-  translate(message.content.split(" ").slice(1).toString(), {
-    from: 'auto',
-    to: 'en'
-  }).then(res => {
-    console.log(res.text);
-    message.channel.send(`
-      From ${isoConv(res.from.language.iso)} to English
-      `)
-    message.channel.send(res.text);
-    return;
-  }).catch(err => {
-    message.channel.send(ess.errorHandle(err));
-  });
-}
+
   if (commandIs("kick")) {
     try {
       let member = message.mentions.members.first();
@@ -208,7 +194,7 @@ if(commandIs("translate")){
       message.channel.send(ess.errorHandle(err));
     }
   }
-  if (message.content.startsWith("!ban")) {
+  if (message.content.startsWith(":ban")) {
     try {
       let member = message.mentions.members.first();
       if (!member) {
@@ -227,17 +213,8 @@ if(commandIs("translate")){
       }
 
       member.send(`
-**You have been banned! - PERMANENT**
-**Reason:** ${reason}
-
-*Oh, no! Seems like you have been banned! What do I do now?*
-
-You have been banned. This could be unfortunate or fortunate to you, depends on what you wanted to happen :thinking:
-If you see this as bad news and would like to appeal and say sorry for one more chance, please join our appeal Discord server.(Link: https://discord.gg/FSZwEBV) If you break any of the rules in this server in here, you will be permanently banned from all of the servers *and* the appeals server.
-
-Sad news, if you have done something that is very offensive or unforgivable by the admins, you are getting banned from the appeals server and will never be able to join the Gaze server again. You can use an alt though ;)
-
-By the way, we still love you no matter what you did. Even though we hated, we weren't that offended. :heart:`).then(member.ban(reason))
+You have been banned! - PERMANENT
+Reason: ${reason} `).then(member.ban(reason))
       message.channel.send(`${member.user.tag} has been baned by ${message.author.tag} of the reason that ${reason}`);
       return;
 
@@ -246,9 +223,6 @@ By the way, we still love you no matter what you did. Even though we hated, we w
       message.channel.send(ess.errorHandle(err));
     }
   }
-    if (message.content.startsWith("!updates")) {
-      message.channel.send("Latest update : !setnick")
-    }
 if(commandIs("unban")){
   try {
 
@@ -268,23 +242,12 @@ if(commandIs("unban")){
   }
 }
 
-if (commandIs("verify")) {
-  let role = message.guild.roles.find("name", "Verified");
-  if (!role) {
-    message.guild.createRole({
-      name: 'Verified',
-      color: 'GREEN',
-    })
-  }
-  message.guild.member(message.author).addRole(role)
-  message.author.sendMessage("You are verified")
-  return;
-}
+
 })
 
 client.on('message', message => {
-  if (message.content === '!buy') {
-  message.author.sendMessage("Thank you for using xAtom, please join this discord server to contect the owner Anonymous0perator#0510 | Discord code : https://discord.gg/V4B3QPA . For now it depends on your discord server members. \n What i mean by that is it counts on your amount of member \n The rate is correct :\n 50 members = 30R$ \n 100 members = 50R$")
+  if (message.content === ':support') {
+  message.author.sendMessage("Please, join the discord server for the support you need. https://discord.gg/cx5mBWn")
   }
 });
 
