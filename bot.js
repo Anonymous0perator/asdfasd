@@ -178,8 +178,8 @@ client.on('message', message => {
         message.channel.send("I cannot kick this user. Please check permissions.");
         return;
       }
-
-      let reason = message.content.split(" ").slice(2).join(" ")
+	if(message.member.hasPermission("kickMembers")){
+	 let reason = message.content.split(" ").slice(2).join(" ")
       if (!reason) {
         message.channel.send("Please indicate a reason for the kick!");
         return;
@@ -188,6 +188,8 @@ client.on('message', message => {
       member.kick(reason)
       message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} of the reason that ${reason}`);
       return;
+	}
+     
 
 
     } catch (err) {
