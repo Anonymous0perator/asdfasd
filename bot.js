@@ -35,7 +35,7 @@ client.on('message', message => {
  
 
 if(commandIs("donate")){
-message.channel.send("Donations are welcome, just visit this server order to donate us!, you will get VIP commands. https://discord.gg/ddUfRUn");
+message.channel.send("Donations are welcome, just visit this server order to donate us! You will get VIP commands. https://discord.gg/ddUfRUn");
 }
 if(commandIs("serverinfo")){
  try {
@@ -124,6 +124,8 @@ if(commandIs("serverinfo")){
       .setDescription(`All the commands provided for the release version of xAtom. Default prefix is ${prefix}`)
       .setColor(0x70b080)
       .addField("help", "This help panel")
+      .addField("donation", "Make us the best bot!")
+      .addField("serverinfo", "Information about the server")
       .addField("ping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
       .addField("verify", "Gives you a verified role (roblox supported)")
