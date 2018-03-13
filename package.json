@@ -9,6 +9,5 @@
   "dependencies": {
     "discord.js": "11.3.2",
     "request": "2.81.0",
-    "roblox.js":"4.0.2"
   }
 }
