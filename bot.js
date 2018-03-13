@@ -1,10 +1,5 @@
 const Discord = require("discord.js");
 const client = new Discord.Client();
-const client = new commando.Client({
-    commandPrefix: ':',
-    owner: '369310910512365579',
-    disableEveryone: false
-});
 
 client.on('ready', () => {
   console.log('Bot is up and running!');
