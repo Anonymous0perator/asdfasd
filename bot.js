@@ -124,7 +124,7 @@ if(commandIs("serverinfo")){
       .setDescription(`All the commands provided for the release version of xAtom. Default prefix is ${prefix}`)
       .setColor(0x70b080)
       .addField("help", "This help panel")
-      .addField("donation", "Make us the best bot!")
+      .addField("donate", "Make us the best bot!")
       .addField("serverinfo", "Information about the server")
       .addField("ping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
