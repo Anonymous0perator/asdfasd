@@ -149,7 +149,8 @@ if(commandIs("update")){
 message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
 }
 if(commandIs("membercount")){
- message.channel.send("Members", guild.memberCount, true)
+	let guild = message.guild
+ message.channel.send("Members", guild.memberCount)
 }
 if(commandIs("invite")){
 message.reply("This is the invite for xAtom, https://discordapp.com/oauth2/authorize?client_id=422963132227518490&permissions=8&scope=bot")
