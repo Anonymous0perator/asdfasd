@@ -149,12 +149,30 @@ if(commandIs("update")){
 message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
 }
 if(commandIs("membercount")){
-	let guild = message.guild
- message.channel.send("Members", guild.memberCount)
+	try {
+      let guild = message.guild
+
+      const embed = new Discord.RichEmbed()
+        .setDescription("Membercount")
+        .setColor(0x70b080)
+        .setThumbnail(guild.iconURL)
+        .setTimestamp(new Date())
+        .addField("Name", guild.name, true)
+        .addField("ID", guild.id, true)
+        .addField("Owner", guild.owner.user.tag, true)
+        .addField("Members", guild.memberCount, true)
+
+      message.channel.send(embed)
+      return;
+    } catch (err) {
+      console.log(err);
+      message.channel.send(ess.errorHandle(err));
+    }
 }
 if(commandIs("invite")){
 message.reply("This is the invite for xAtom, https://discordapp.com/oauth2/authorize?client_id=422963132227518490&permissions=8&scope=bot")
 }
+	
     if(commandIs("mute")) {
 	   if(message.member.hasPermission("MANAGE_MESSAGES")){
 	   try {
