@@ -131,19 +131,25 @@ if(commandIs("serverinfo")){
       .addField("serverinfo", "Information about the server")
       .addField("ping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
-      .addField("verify", "Gives you a verified role (roblox supported)")
+      .addField("update", "Future updates,")
       .addField("purge", "Delete a bulk load of messages (100 max)")
       .addField("ban", "Bans a member from the server")
       .addField("unban", "Unbans the member from the server")
       .addField("kick", "Kicks a member from the server")
       .addField("warn", "It will warn the people who you tagged")
       .addField("support", "Invite link to support channel")
+      .addField("invite","Gives link to invite xatom")
       .setFooter("xAtom", client.user.avatarURL)
       .setThumbnail(client.user.avatarURL)
 
     message.channel.send(embed);
   }
-
+if(commandIs("update")){
+message.channel.send("Update logs: invite | Upcoming updates: linking with roblox "
+}
+if(commandIs("invite")){
+message.reply("This is the invite for xAtom, https://discordapp.com/oauth2/authorize?client_id=422963132227518490&permissions=8&scope=bot")
+}
     if(commandIs("mute")) {
 	   if(message.member.hasPermission("MANAGE_MESSAGES")){
 	   try {
