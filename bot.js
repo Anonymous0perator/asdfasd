@@ -145,7 +145,7 @@ if(commandIs("serverinfo")){
     message.channel.send(embed);
   }
 if(commandIs("update")){
-message.channel.send("Update logs: invite | Upcoming updates: linking with roblox "
+message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
 }
 if(commandIs("invite")){
 message.reply("This is the invite for xAtom, https://discordapp.com/oauth2/authorize?client_id=422963132227518490&permissions=8&scope=bot")
