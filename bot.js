@@ -127,6 +127,7 @@ if(commandIs("serverinfo")){
       .setDescription(`All the commands provided for the release version of xAtom. Default prefix is ${prefix}`)
       .setColor(0x70b080)
       .addField("help", "This help panel")
+    	.addField("membercount","Counts member")
       .addField("donate", "Make us the best bot!")
       .addField("serverinfo", "Information about the server")
       .addField("ping", "Shows ping (message round trip) of the bot")
@@ -146,6 +147,9 @@ if(commandIs("serverinfo")){
   }
 if(commandIs("update")){
 message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
+}
+if(commandIs("membercount")){
+ message.channel.send("Members", guild.memberCount, true)
 }
 if(commandIs("invite")){
 message.reply("This is the invite for xAtom, https://discordapp.com/oauth2/authorize?client_id=422963132227518490&permissions=8&scope=bot")
