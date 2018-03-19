@@ -34,7 +34,16 @@ client.on('message', message => {
     }
   }
 
- 
+   if(commandIs("fix")){
+          let member = message.guild.member(message.author);
+        let role = message.guild.roles.find("name", "Verification");
+        if(message.member.roles.some(r=>["Iceland Personal"].includes(r.name)) ) {
+          member.removeRole(role).catch(console.error);
+
+        } else {
+          message.channel.send("Please verify before doing this command")
+        }
+        }
 
 
 if(commandIs("donate")){
