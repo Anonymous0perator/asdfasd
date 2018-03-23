@@ -33,7 +33,17 @@ client.on('message', message => {
       return true;
     }
   }
+if(commandIs("update")){
+ let member = message.guild.member(message.author);
+let role = message.guild.roles.find("name", "[OR] Private");
+	if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) ) {
+          member.setNickname(`[PVT] ${member.user.username}`)
 
+        } elseif(message.member.roles.some(r=>["[OR] Lance Corporal"].includes(r.name))) {
+		
+          member.setNickname(`[LCPL] ${member.user.username}`)
+        }
+}
    if(commandIs("fix")){
           let member = message.guild.member(message.author);
         let role = message.guild.roles.find("name", "Verification");
@@ -154,7 +164,7 @@ if(commandIs("serverinfo")){
 
     message.channel.send(embed);
   }
-if(commandIs("update")){
+if(commandIs("updates")){
 message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
 }
 if(commandIs("membercount")){
