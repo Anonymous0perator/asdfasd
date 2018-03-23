@@ -38,6 +38,10 @@ if(commandIs("update")){
   let role = message.guild.roles.find("name", "[OR] Private");
   if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) )
           member.setNickname(`[PVT] ${member.user.username}`)
+	else {
+  if(message.member.roles.some(r=>["[OR] Lance Corporal"].includes(r.name)) )
+	   member.setNickname(`[LCPL] ${member.user.username}`)
+	}
 
 }
    if(commandIs("fix")){
