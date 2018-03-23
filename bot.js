@@ -34,15 +34,11 @@ client.on('message', message => {
     }
   }
 if(commandIs("update")){
- let member = message.guild.member(message.author);
-let role = message.guild.roles.find("name", "[OR] Private");
-	if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) ) {
+  let member = message.guild.member(message.author);
+  let role = message.guild.roles.find("name", "[OR] Private");
+  if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) )
           member.setNickname(`[PVT] ${member.user.username}`)
 
-        } elseif(message.member.roles.some(r=>["[OR] Lance Corporal"].includes(r.name))) {
-		
-          member.setNickname(`[LCPL] ${member.user.username}`)
-        }
 }
    if(commandIs("fix")){
           let member = message.guild.member(message.author);
