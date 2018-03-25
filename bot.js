@@ -33,52 +33,16 @@ client.on('message', message => {
       return true;
     }
   }
-if(commandIs("update")){
-  let member = message.guild.member(message.author);
-  let role = message.guild.roles.find("name", "[OR] Private");
-  if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) )
-          member.setNickname(`[PVT] ${member.user.username}`)
-	else {
-  if(message.member.roles.some(r=>["[OR] Lance Corporal"].includes(r.name)) )
-	   member.setNickname(`[LCPL] ${member.user.username}`)
- if(message.member.roles.some(r=>["[OR] Coporal"].includes(r.name)) )
-        member.setNickname(`[CPL] ${member.user.username}`)
-	if(message.member.roles.some(r=>["[OR] Sergeant"].includes(r.name)) )
-        member.setNickname(`[SGT] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OR] Staff Sergeant"].includes(r.name)) )
-        member.setNickname(`[SSGT] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OR] Lieutenant"].includes(r.name)) )
-        member.setNickname(`[LT] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OR] Major"].includes(r.name)) )
-        member.setNickname(`[MAJ] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Lieutenant Colonel"].includes(r.name)) )
-        member.setNickname(`[LT COL] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Colonel"].includes(r.name)) )
-        member.setNickname(`[COL] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Brigadier"].includes(r.name)) )
-        member.setNickname(`[BRIG] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Major General"].includes(r.name)) )
-        member.setNickname(`[MG] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Lieutenant General"].includes(r.name)) )
-        member.setNickname(`[LT GEN] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] General"].includes(r.name)) )
-        member.setNickname(`[GEN] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Head Developer"].includes(r.name)) )
-        member.setNickname(`[DEV] ${member.user.username}`)
-		if(message.member.roles.some(r=>["[OF] Marshal"].includes(r.name)) )
-        member.setNickname(`[M] ${member.user.username}`)
-	}
-
-}
-   if(commandIs("fix")){
-          let member = message.guild.member(message.author);
-        let role = message.guild.roles.find("name", "Verification");
-        if(message.member.roles.some(r=>["Iceland Personal"].includes(r.name)) ) {
-          member.removeRole(role).catch(console.error);
-
-        } else {
-          message.channel.send("Please verify before doing this command")
+	  if(message.member.roles.find("name", "Iceland Personal")){
+	 let role = message.guild.roles.find("name", "Verification");
+      let member = message.guild.member(message.author);
+      	member.removeRole(role).catch(console.error);
         }
+
+  
+    if(message.member.roles.find("name", "Iceland Personal")){
+      let member = message.guild.member(message.author);
+      member.setNickname(`[${member.highestRole.name}] ${member.user.username}`)
         }
 
 
