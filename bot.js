@@ -38,9 +38,8 @@ client.on('message', message => {
       let member = message.guild.member(message.author);
       	member.removeRole(role).catch(console.error);
         }
-
-    if(message.member.roles.find("name", "Iceland Personal")){
-      let member = message.guild.member(message.author);
+if(commandIs("update")){
+let member = message.guild.member(message.author);
   let role = message.guild.roles.find("name", "[OR] Private");
   if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) )
           member.setNickname(`[PVT] ${member.displayName}`)
@@ -75,7 +74,10 @@ client.on('message', message => {
         member.setNickname(`[M] ${member.displayName}`)
 	}
 
-        }
+}
+    
+      
+        
   
   
 
