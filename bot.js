@@ -33,6 +33,17 @@ client.on('message', message => {
       return true;
     }
   }
+	
+	
+	if(commandIs("tagcheck")){
+	let roleID = ;
+let membersWithRole = message.guild.roles.get(roleID).members;
+console.log(`Got ${membersWithRole.size} members with that role.`);
+	
+	
+	}
+	
+	
 	  if(message.member.roles.find("name", "Iceland Personal")){
 	 let role = message.guild.roles.find("name", "Verification");
       let member = message.guild.member(message.author);
