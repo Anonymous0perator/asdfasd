@@ -33,65 +33,8 @@ client.on('message', message => {
       return true;
     }
   }
-	
-	
-	if(commandIs("tagcheck")){
-	let roleID = ;
-let membersWithRole = message.guild.roles.get(roleID).members;
-console.log(`Got ${membersWithRole.size} members with that role.`);
-	
-	
-	}
-	
-	
-	  if(message.member.roles.find("name", "Iceland Personal")){
-	 let role = message.guild.roles.find("name", "Verification");
-      let member = message.guild.member(message.author);
-      	member.removeRole(role).catch(console.error);
-        }
-if(commandIs("update")){
-let member = message.guild.member(message.author);
-  let role = message.guild.roles.find("name", "[OR] Private");
-  if(message.member.roles.some(r=>["[OR] Private"].includes(r.name)) )
-          member.setNickname(`[PVT] ${member.displayName}`)
-	else {
-  if(message.member.roles.some(r=>["[OR] Lance Corporal"].includes(r.name)) )
-	   member.setNickname(`[LCPL] ${member.displayName}`)
- if(message.member.roles.some(r=>["[OR] Coporal"].includes(r.name)) )
-        member.setNickname(`[CPL] ${member.displayName}`)
-	if(message.member.roles.some(r=>["[OR] Sergeant"].includes(r.name)) )
-        member.setNickname(`[SGT] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OR] Staff Sergeant"].includes(r.name)) )
-        member.setNickname(`[SSGT] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OR] Lieutenant"].includes(r.name)) )
-        member.setNickname(`[LT] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OR] Major"].includes(r.name)) )
-        member.setNickname(`[MAJ] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Lieutenant Colonel"].includes(r.name)) )
-        member.setNickname(`[LTCOL] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Colonel"].includes(r.name)) )
-        member.setNickname(`[COL] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Brigadier"].includes(r.name)) )
-        member.setNickname(`[BRIG] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Major General"].includes(r.name)) )
-        member.setNickname(`[MG] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Lieutenant General"].includes(r.name)) )
-        member.setNickname(`[LTGEN] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] General"].includes(r.name)) )
-        member.setNickname(`[GEN] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Head Developer"].includes(r.name)) )
-        member.setNickname(`[DEV] ${member.displayName}`)
-		if(message.member.roles.some(r=>["[OF] Marshal"].includes(r.name)) )
-        member.setNickname(`[M] ${member.displayName}`)
-	}
 
-}
-    
-      
-        
-  
-  
-
+ 
 
 if(commandIs("donate")){
 message.channel.send("Donations are welcome, just visit this server order to donate us! You will get VIP commands. https://discord.gg/ddUfRUn");
@@ -201,7 +144,7 @@ if(commandIs("serverinfo")){
 
     message.channel.send(embed);
   }
-if(commandIs("updates")){
+if(commandIs("update")){
 message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
 }
 if(commandIs("membercount")){
