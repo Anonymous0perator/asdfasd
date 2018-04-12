@@ -127,8 +127,6 @@ if(commandIs("serverinfo")){
       .addField("botping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
       .addField("purge", "Delete a bulk load of messages (100 max)")
-      .addField("ban", "Bans a member from the server")
-      .addField("unban", "Unbans the member from the server")
       .addField("kick", "Kicks a member from the server")
       .addField("warn", "It will warn the people who you tagged")
  
@@ -270,52 +268,6 @@ if(commandIs("membercount")){
     }
   }
 
-if(commandIs("kick")) {
-    // This command must be limited to mods and admins. In this example we just hardcode the role names.
-    // Please read on Array.some() to understand this bit: 
-    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
-    if(!message.member.permissions.has("kickMembers").includes(r.name)) 
-      return message.reply("Sorry, you don't have permissions to use this!");
-    
-    // Let's first check if we have a member and if we can kick them!
-    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
-    // We can also support getting the member by ID, which would be args[0]
-    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
-    if(!member)
-      return message.reply("Please mention a valid member of this server");
-    if(!member.kickable) 
-      return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
-    
-    // slice(1) removes the first part, which here should be the user mention or ID
-    // join(' ') takes all the various parts to make it a single string.
-    let reason = args.slice(1).join(' ');
-    if(!reason) reason = "No reason provided";
-    
-    // Now, time for a swift kick in the nuts!
-    member.kick(reason)
-      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
-    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
-
-  }
-  
-if(commandIs("unban")){
-  try {
-
-    let userid = message.content.split(" ").slice(1).join(" ")
-    if (!userid) {
-      message.channel.send("Please use an ID of the user to unban.");
-      return;
-    }
-
-    message.guild.unban(userid)
-    message.channel.send(`user has been unbaned by ${message.author.tag}. Happy returning!`);
-    return;
-
-
-  } catch (err) {
-    message.channel.send(ess.errorHandle(err));
-  }
-}
 
 
 })
