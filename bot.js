@@ -63,7 +63,28 @@ if(commandIs("serverinfo")){
 }
   //Ping Command
   if (commandIs("botping")) {
-    message.channel.send(`Pong! The bot's ping is ${Date.now() - message.createdTimestamp} ms`);
+	  message.channel.send({embed: {
+    color: 3447003,
+    author: {
+      name: client.user.username,
+      icon_url: client.user.avatarURL
+    },
+    title: "Bot ping",
+    url: "",
+    description: "This shows the ping of bot, and how fast the bot is",
+    fields: [{
+        name: "Ping",
+        value: "`Pong! The bot's ping is ${Date.now() - message.createdTimestamp} ms`"
+      }
+    ],
+    timestamp: new Date(),
+    footer: {
+      icon_url: client.user.avatarURL,
+      text: "Alpha"
+    }
+  }
+});
+    
     return;
   }
 
