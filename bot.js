@@ -35,10 +35,6 @@ client.on('message', message => {
   }
 
  
-
-if(commandIs("donate")){
-message.channel.send("Donations are welcome, just visit this server order to donate us! You will get VIP commands. https://discord.gg/ddUfRUn");
-}
 if(commandIs("serverinfo")){
  try {
       let guild = message.guild
@@ -66,7 +62,7 @@ if(commandIs("serverinfo")){
     }
 }
   //Ping Command
-  if (commandIs("ping")) {
+  if (commandIs("botping")) {
     message.channel.send(`Pong! The bot's ping is ${Date.now() - message.createdTimestamp} ms`);
     return;
   }
@@ -83,7 +79,7 @@ if(commandIs("serverinfo")){
           .setColor(0x70b080)
           .setThumbnail(member.displayAvatarURL)
           .setTimestamp(new Date())
-          .setFooter("xAtom", client.user.avatarURL)
+          .setFooter("Alpha", client.user.avatarURL)
           .addField("ID", member.id)
           .addField("Discriminator", member.discriminator)
           .addField("Status", member.presence.status)
@@ -102,7 +98,7 @@ if(commandIs("serverinfo")){
           .setColor(0x70b080)
           .setThumbnail(member.displayAvatarURL)
           .setTimestamp(new Date())
-          .setFooter("xAtom", client.user.avatarURL)
+          .setFooter("Alpha", client.user.avatarURL)
           .addField("ID", member.id)
           .addField("Discriminator", member.discriminator)
           .addField("Status", member.presence.status)
@@ -122,14 +118,13 @@ if(commandIs("serverinfo")){
 
   if (commandIs("help")) {
     const embed = new Discord.RichEmbed()
-      .setTitle("Commands List for xAtom")
-      .setDescription(`All the commands provided for the release version of xAtom. Default prefix is ${prefix}`)
+      .setTitle("Commands List for Alpha")
+      .setDescription(`All the commands provided for the release version of Alpha. Default prefix is ${prefix}`)
       .setColor(0x70b080)
       .addField("help", "This help panel")
     	.addField("membercount","Counts member")
-      .addField("donate", "Make us the best bot!")
       .addField("serverinfo", "Information about the server")
-      .addField("ping", "Shows ping (message round trip) of the bot")
+      .addField("botping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
       .addField("update", "Future updates,")
       .addField("purge", "Delete a bulk load of messages (100 max)")
@@ -138,15 +133,11 @@ if(commandIs("serverinfo")){
       .addField("kick", "Kicks a member from the server")
       .addField("warn", "It will warn the people who you tagged")
       .addField("support", "Invite link to support channel")
-      .addField("invite","Gives link to invite xatom")
-      .setFooter("xAtom", client.user.avatarURL)
+      .setFooter("Alpha", client.user.avatarURL)
       .setThumbnail(client.user.avatarURL)
 
     message.channel.send(embed);
   }
-if(commandIs("update")){
-message.channel.send("Update logs: invite | Upcoming updates: linking with roblox ")
-}
 if(commandIs("membercount")){
 	try {
       let guild = message.guild
@@ -168,9 +159,7 @@ if(commandIs("membercount")){
       message.channel.send(ess.errorHandle(err));
     }
 }
-if(commandIs("invite")){
-message.reply("This is the invite for xAtom, https://discordapp.com/oauth2/authorize?client_id=422963132227518490&permissions=8&scope=bot")
-}
+
 	
     if(commandIs("mute")) {
 	   if(message.member.hasPermission("MANAGE_MESSAGES")){
@@ -364,11 +353,7 @@ if(commandIs("unban")){
 
 })
 
-client.on('message', message => {
-  if (message.content === ':support') {
-  message.author.sendMessage("Please, join the discord server for the support you need. https://discord.gg/cx5mBWn")
-  }
-});
+
 
 
 	  
