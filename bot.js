@@ -126,13 +126,12 @@ if(commandIs("serverinfo")){
       .addField("serverinfo", "Information about the server")
       .addField("botping", "Shows ping (message round trip) of the bot")
       .addField("userinfo", "Information about user in the server")
-      .addField("update", "Future updates,")
       .addField("purge", "Delete a bulk load of messages (100 max)")
       .addField("ban", "Bans a member from the server")
       .addField("unban", "Unbans the member from the server")
       .addField("kick", "Kicks a member from the server")
       .addField("warn", "It will warn the people who you tagged")
-      .addField("support", "Invite link to support channel")
+ 
       .setFooter("Alpha", client.user.avatarURL)
       .setThumbnail(client.user.avatarURL)
 
@@ -227,7 +226,7 @@ if(commandIs("membercount")){
       }
       let deleteCount = parseInt(message.content.split(" ")[1])
       if (deleteCount > 99) {
-        message.channel.send("Yikes! The max limit for message bulkDelete is 100");
+        message.channel.send("Please try lower number than 100.");
         return;
       }
 
@@ -271,66 +270,34 @@ if(commandIs("membercount")){
     }
   }
 
-  if (commandIs("kick")) {
-    try {
-      let member = message.mentions.members.first();
-      if (!member) {
-        message.channel.send("Please mention a valid member in this guild.");
-        return;
-      }
-      if (!member.kickable) {
-        message.channel.send("I cannot kick this user. Please check permissions.");
-        return;
-      }
-	if(message.member.hasPermission("kickMembers")){
-	 let reason = message.content.split(" ").slice(2).join(" ")
-      if (!reason) {
-        message.channel.send("Please indicate a reason for the kick!");
-        return;
-      }
+if(commandIs("kick")) {
+    // This command must be limited to mods and admins. In this example we just hardcode the role names.
+    // Please read on Array.some() to understand this bit: 
+    // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Array/some?
+    if(!message.member.role.hasPermission("kickMembers")].includes(r.name)) )
+      return message.reply("Sorry, you don't have permissions to use this!");
+    
+    // Let's first check if we have a member and if we can kick them!
+    // message.mentions.members is a collection of people that have been mentioned, as GuildMembers.
+    // We can also support getting the member by ID, which would be args[0]
+    let member = message.mentions.members.first() || message.guild.members.get(args[0]);
+    if(!member)
+      return message.reply("Please mention a valid member of this server");
+    if(!member.kickable) 
+      return message.reply("I cannot kick this user! Do they have a higher role? Do I have kick permissions?");
+    
+    // slice(1) removes the first part, which here should be the user mention or ID
+    // join(' ') takes all the various parts to make it a single string.
+    let reason = args.slice(1).join(' ');
+    if(!reason) reason = "No reason provided";
+    
+    // Now, time for a swift kick in the nuts!
+    await member.kick(reason)
+      .catch(error => message.reply(`Sorry ${message.author} I couldn't kick because of : ${error}`));
+    message.reply(`${member.user.tag} has been kicked by ${message.author.tag} because: ${reason}`);
 
-      member.kick(reason)
-      message.channel.send(`${member.user.tag} has been kicked by ${message.author.tag} of the reason that ${reason}`);
-      return;
-	}
-     
-
-
-    } catch (err) {
-      message.channel.send(ess.errorHandle(err));
-    }
   }
-  if (message.content.startsWith(":ban")) {
-    try {
-      let member = message.mentions.members.first();
-      if (!member) {
-        message.channel.send("Please mention a valid member in this guild.");
-        return;
-      }
-      if (!member.bannable) {
-        message.channel.send("I cannot ban this user. Please check permissions.");
-        return;
-      }
-if(message.member.hasPermission("banMembers")){
- let reason = message.content.split(" ").slice(2).join(" ")
-      if (!reason) {
-        message.channel.send("Please indicate a reason for the ban!");
-        return;
-      }
-}
-     
-
-      member.send(`
-You have been banned! - PERMANENT
-Reason: ${reason} `).then(member.ban(reason))
-      message.channel.send(`${member.user.tag} has been baned by ${message.author.tag} of the reason that ${reason}`);
-      return;
-
-
-    } catch (err) {
-      message.channel.send(ess.errorHandle(err));
-    }
-  }
+  
 if(commandIs("unban")){
   try {
 
@@ -341,7 +308,7 @@ if(commandIs("unban")){
     }
 
     message.guild.unban(userid)
-    message.channel.send(`<@357479079378681857> has been unbaned by ${message.author.tag}. Happy returning!`);
+    message.channel.send(`user has been unbaned by ${message.author.tag}. Happy returning!`);
     return;
 
 
