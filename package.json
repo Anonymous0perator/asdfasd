@@ -1,5 +1,5 @@
 {
-  "start": "node main.js",
+  "start": "node bot.js",
   "dependencies": {
     "discord.js": "^11.3.2",
     "random-lorem": "^1.0.4",
