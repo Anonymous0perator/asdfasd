@@ -1,12 +1,9 @@
 {
-  "name": "xatom",
-  "description": "xatom",
-  "version": "0.0.0",
-  "main": "bot.js",
-  "scripts": {
-    "start": "node bot.js"
-  },
+  "start": "node main.js",
   "dependencies": {
-    "discord.js": "11.3.2"
+    "discord.js": "^11.3.2",
+    "random-lorem": "^1.0.4",
+    "roblox-js": "^3.0.7",
+    "uws": "^8.14.0"
   }
 }
