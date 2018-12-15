@@ -47,4 +47,3 @@ if(command === "shout") {
 
 
 bot.login(process.env.BOT_TOKEN) // Logs into Discord
-client.login(process.env.BOT_TOKEN);
