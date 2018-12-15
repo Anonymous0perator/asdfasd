@@ -1,112 +1,50 @@
-var discord = require('discord.js');
-var roblox = require('roblox-js');
-var client = new discord.Client();
+// DEPENDANCIES
+let Discord = require('discord.js');
+let roblox = require('roblox-js');
+let bot = new Discord.Client();
 
-client.on("ready", () => {
-  client.user.setGame(`Serving CAF for ${client.users.size} users.`);
+// LOGIN INFO
+let username = "CAF_hexcore"; // ROBLOX
+let password = "HJN-WeX-FY6-Mdh"; // ROBLOX
+
+// MISC
+let prefix = "=" // Prefix used for the command
+let GroupId = 4572431;
+
+// COMMAND
+
+bot.on("ready", () => {
+  client.user.setGame(`with shouts!`);
   console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
-client.on('guildMemberAdd', member => {
-  let guild = member.guild;
-  let user = member.user
-  console.log(`${user.tag} joined ${guild}`)
-});
+bot.on("message", async message => { // Event runs when there is a new message
+if(message.author.bot) return; // Here we check if the message sender is the bot, if it is, it returns and does not carry any further.
+if(message.content.indexOf(prefix) !== 0) return; // Checks if the message has the Prefix
 
-client.on('guildMemberRemove', member => {
-  let guild = member.guild;
-  let user = member.user
-  console.log(`${user.tag} left ${guild}`)
-});
+// Here we separate our "command" and our "arguments/args" for the command. 
+const args = message.content.slice(prefix.length).trim().split(/ +/g);
+const command = args.shift().toLowerCase();
 
-var prefix = '=';
-var groupId = 4572431;
-var maximumRank = 130;
+// Checks if the command is matching the provided string
 
-function isCommand(command, message){
-	var command = command.toLowerCase();
-	var content = message.content.toLowerCase();
-	return content.startsWith(prefix + command);
-}
+if(command === "shout") {
+    if(!message.member.roles.some(r=>["High Command"].includes(r.name)) ) // OPTIONAL - Checks if the sender has the specified roles to carry on further
+        return message.reply("You can't use this command.");
+  roblox.login(username, password)
+  .then(function () {
+    const shoutMSG = "Canadian Armed Forces Basic Training is being hosted in academy, please report to the academy. https://www.roblox.com/games/2631939165/CFB-Suffield-Military-Academy"; // Joins the arguments minus prefix to form the message to be shouted
+        roblox.shout(GroupId, shoutMSG);
+        console.log(`Shouted ${shoutMSG}`); // OPTIONAL - Logs specified string to the console
+        message.reply(`Shouted ${shoutMSG} to the group.`) // OPTIONAL - Sends a message to the channe
+  })
+.catch(function (err) { // Catches any errors with the function
+    console.error(err.stack);
+    });
+  }
+})
 
-client.on('message', (message) => {
-	if (message.author.bot) return; // Dont answer yourself.
-    var args = message.content.split(/[ ]+/)
-    if(isCommand('Promote', message)){
-    	var username = args[1]
-    	if (username){
-    		message.channel.send(`Checking ROBLOX for ${username}`)
-    		roblox.getIdFromUsername(username)
-			.then(function(id){
-				roblox.getRankInGroup(groupId, id)
-				.then(function(rank){
-					if(maximumRank <= rank){
-						message.channel.send(`${id} is rank ${rank} and not promotable.`)
-					} else {
-						message.channel.send(`${id} is rank ${rank} and promotable.`)
-						roblox.promote(groupId, id)
-						.then(function(roles){
-							message.channel.send(`Promoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
-						}).catch(function(err){
-							message.channel.send("Failed to promote.")
-						});
-					}
-				}).catch(function(err){
-					message.channel.send("Couldn't get him in the group.")
-				});
-			}).catch(function(err){ 
-				message.channel.send(`Sorry, but ${username} doesn't exist on ROBLOX.`)
-			});
-    	} else {
-    		message.channel.send("Please enter a username.")
-    	}
-    	return;
-    }
 
-    if(isCommand('Demote', message)){
-    	var username = args[1]
-    	if (username){
-    		message.channel.send(`Checking ROBLOX for ${username}`)
-    		roblox.getIdFromUsername(username)
-			.then(function(id){
-				roblox.getRankInGroup(groupId, id)
-				.then(function(rank){
-					if(maximumRank <= rank){
-						message.channel.send(`${id} is rank ${rank} and not demoteable.`)
-					} else {
-						message.channel.send(`${id} is rank ${rank} and demoteable.`)
-						roblox.demote(groupId, id)
-						.then(function(roles){
-							message.channel.send(`Demoted from ${roles.oldRole.Name} to ${roles.newRole.Name}`)
-						}).catch(function(err){
-							message.channel.send("Failed to Demote.")
-						});
-					}
-				}).catch(function(err){
-					message.channel.send("Couldn't get him in the group.")
-				});
-			}).catch(function(err){ 
-				message.channel.send(`Sorry, but ${username} doesn't exist on ROBLOX.`)
-			});
-    	} else {
-    		message.channel.send("Please enter a username.")
-    	}
-    	return;
-    }
-    if(isCommand('Shout', message)) {
-    	var shoutmessage = args[1]
-    	roblox.shout(groupID, id)
-    	.then(function(shout){
-    		message.channel.send(`Shouting ${shoutmessage}`)
-    	}).catch(function(err){
-    		message.channel.send("Failed to Shout!")
-    	});
-    } else{
-    	message.channel.send("Please enter your shout message.")
-    }
-    return;
 
-});
+bot.login(process.env.BOT_TOKEN) // Logs into Discord
 client.login(process.env.BOT_TOKEN);
-roblox.login.password(process.env.PASSWORD);
-roblox.login.username(process.env.USERNAME);
