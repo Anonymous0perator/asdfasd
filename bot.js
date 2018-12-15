@@ -14,8 +14,6 @@ let GroupId = 4572431;
 // COMMAND
 
 bot.on("ready", () => {
-  client.user.setGame(`with shouts!`);
-  console.log(`Ready to serve on ${client.guilds.size} servers, for ${client.users.size} users.`);
 });
 
 bot.on("message", async message => { // Event runs when there is a new message
