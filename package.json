@@ -1,9 +1,10 @@
 {
-  "start": "node bot.js",
+  "start": "node main.js",
   "dependencies": {
-    "discord.js": "^11.3.2",
+    "discord.js": "^11.1.0",
     "random-lorem": "^1.0.4",
-    "roblox-js": "^3.0.7",
-    "uws": "^8.14.0"
+    "roblox-js": "^3.0.6",
+    "uws": "^8.14.0",
+    "opusscript": "0.0.4"
   }
 }
