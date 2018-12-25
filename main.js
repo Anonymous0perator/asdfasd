@@ -2,7 +2,7 @@ const request = require('request');//idk
 const discord = require('discord.js'); //Discord.js is used to write bots in JavaScript
 const roblox = require('roblox-js'); //Roblox-js is used to do some functions within www.roblox.com
 const client = new discord.Client(); //Getting Discord Client
-const prefix = ':';
+const prefix = '=';
 const groupId = 3828960;
 var issaVerify = false;
 var verWord = (~~(Math.random() * 2) ? 'rutherfordium' : 'xenonite');
@@ -148,7 +148,7 @@ if(message.member.roles.find("name", "TRADOC")|| message.member.roles.find("name
 
 }
 if (isCommand("help", message)) {
-  message.channel.send("hexcore-roka 명령 리스트\n Default prefix is :\n help | enlistedtraining | basictraining | tagme | listrank | update")
+  message.channel.send("hexcore-roka 명령 리스트\n Default prefix is =\n help | enlistedtraining | basictraining | tagme | listrank | update")
 
 }
   if(isCommand('listrank', message)){
